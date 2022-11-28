@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Item from './components/Item';
 
 function App() {
+
+  const [itemsList, setItemsList]  = useState(
+    [
+      {name: "Jay",
+      alias: "Superman"
+      },
+      {
+        name: "Rishi",
+        alias: "Batman"
+      }
+    ]
+  ) 
+
+  function addItem(){
+    setItemsList(oldArray => [...oldArray, {name:"test",alias:"test"}])
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={addItem}>Add new item</button>
+     {
+itemsList.map(item=>{
+  return <Item key={item.name} name={item.name} alias={item.alias}/>
+})
+     } 
     </div>
   );
 }
